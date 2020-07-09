@@ -69,7 +69,10 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 
-now.json
+vercel.json
 
 # Build Folder
 dist/
+.vercel
+
+.vscode

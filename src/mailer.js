@@ -11,27 +11,67 @@ function setup() {
   });
 }
 
-export function forwardContactFormInfoSendGrid(form) {
-  const tranport = setup();
-  const email = {
+/* export async function forwardContactFormInfoSendGrid(form) {
+  const smtpTransport = setup();
+  
+  const mailOptions = {
     to: 'aolart993@gmail.com',
-    from: 'feoixfj4358345@gmail.com',
-    subject: 'Contact Form',
+    from: 'atlasneo83@gmail.com',
+    subject: 'Online Contact Form',
     text: `
-    This email was recieved from the online contact form.
-
     name: ${form.name}
     email: ${form.email}
     subject: ${form.subject}
     message: ${form.message}
-
     `,
-    attachments: [{
-      filename: 'file.pdf',
-      path: `${form.filepath}`,
-      contentType: 'application/pdf'
-  }],
+    attachments:[{
+      filename: `${form.fileName}`,
+      path: `${form.filePath}`,
+      contentType: `${form.fileType}`
+    }]
   };
 
-  tranport.sendMail(email);
+  let promise = new Promise((resolve, reject) => {
+    smtpTransport.sendMail(mailOptions, (error, response) => {
+      error ? reject(error) : resolve(response);
+      smtpTransport.close();
+    });
+  });
+  let response = await promise;
+  return response;
+} */
+
+
+export async function forwardContactFormInfoSendGrid(form) {
+  const smtpTransport = setup();
+  
+  const mailOptions = {
+    to: 'aolart993@gmail.com',
+    from: 'atlasneo83@gmail.com',
+    subject: 'Online Contact Form',
+    text: `
+    name: ${form.name}
+    email: ${form.email}
+    subject: ${form.subject}
+    message: ${form.message}
+    `
+  };
+
+  if(form.filePath!==""){
+    mailOptions.attachments=[{}];
+    mailOptions.attachments[0] = {
+      filename: `${form.fileName}`,
+      path: `${form.filePath}`,
+      contentType: `${form.fileType}`
+    };
+  }
+
+  let promise = new Promise((resolve, reject) => {
+    smtpTransport.sendMail(mailOptions, (error, response) => {
+      error ? reject(error) : resolve(response);
+      smtpTransport.close();
+    });
+  });
+  let response = await promise;
+  return response;
 }
