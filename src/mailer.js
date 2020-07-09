@@ -11,37 +11,6 @@ function setup() {
   });
 }
 
-/* export async function forwardContactFormInfoSendGrid(form) {
-  const smtpTransport = setup();
-  
-  const mailOptions = {
-    to: 'aolart993@gmail.com',
-    from: 'atlasneo83@gmail.com',
-    subject: 'Online Contact Form',
-    text: `
-    name: ${form.name}
-    email: ${form.email}
-    subject: ${form.subject}
-    message: ${form.message}
-    `,
-    attachments:[{
-      filename: `${form.fileName}`,
-      path: `${form.filePath}`,
-      contentType: `${form.fileType}`
-    }]
-  };
-
-  let promise = new Promise((resolve, reject) => {
-    smtpTransport.sendMail(mailOptions, (error, response) => {
-      error ? reject(error) : resolve(response);
-      smtpTransport.close();
-    });
-  });
-  let response = await promise;
-  return response;
-} */
-
-
 export async function forwardContactFormInfoSendGrid(form) {
   const smtpTransport = setup();
   

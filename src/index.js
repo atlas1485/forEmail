@@ -14,10 +14,4 @@ app.use(express.json());
 
 app.use('/api/email', email);
 
-app.get('/', (req, res) => {
-  res.json({
-    message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄'
-  });
-});
-
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
